@@ -1,49 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout_bookmarks_page.html.twig' %}
 
-{% block title %}My bookmark{% endblock %}
+{% block title %}
+    {{ parent() }}Animes
+{% endblock %}
 
-{% block body %}
-    <div class="row m-5">
-
-        <div class="col text-center border border-dark">
-            <h4 class="mt-3">
-                On going
-            </h4>
-            <hr>
-            <div>
-                {% if onGoingBookmarks|length == 0 %}
-                    <p>
-                        You don't have any bookmark !
-                    </p>
-                {% else %}
-                    {% for bookmark in onGoingBookmarks %}
-                        {% include "components/_onGoingBookmarks_card.html.twig" %}
-                    {% endfor %}                    
-                {% endif %}
-            </div>
-            <div>
-                <a href="{{ path('bookmark_new') }}">Create new</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="row m-5">
-        <div class="col text-center border border-dark">
-            <h4 class="mt-3">
-                Ended
-            </h4>
-            <hr>
-            <div>
-                {% if endedBookmarks|length == 0 %}
-                    <p>
-                        You don't have any ended bookmark !
-                    </p>
-                {% else %}
-                    {% for bookmark in endedBookmarks %}
-                        {% include "components/_endedBookmarks_card.html.twig" %}
-                    {% endfor %}                    
-                {% endif %}
-            </div>
-        </div>
-    </div>
+{% block titlePage %}
+    Animes
 {% endblock %}

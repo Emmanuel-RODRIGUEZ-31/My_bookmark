@@ -1,7 +1,9 @@
 <div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">{{ type.name }}</h5>
-    <p class="card-text">Bookmarks : {{ type.bookmarks|length }}</p>
-    <a href="{{ path('bookmark_{{ type.name }}') }}" class="card-link">Go to {{ type.name }}'s page</a>
-  </div>
+	<div class="card-body">
+		<h5 class="card-title">{{ type.name }}</h5>
+		<p class="card-text">Bookmarks :
+			{{ type.bookmarks|length }}</p>
+		<a href="/{{ type.name }}" class="card-link">Go to
+			{{ type.name }}'s page</a>
+	</div>
 </div>

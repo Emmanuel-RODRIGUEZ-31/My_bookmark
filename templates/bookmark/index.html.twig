@@ -3,11 +3,21 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
-    <div class="row m-5">
-        <div>
-            {% for type in types %}
+    <h1 class="text-center mt-3">
+        My bookmarks
+    </h1>
+    <div class="row d-flex justify-content-center">
+        {% for type in types|slice(0,3) %}
+            <div class="col-md-3 col-12 text-center text-primary mt-5 d-flex justify-content-center">
                 {% include "components/_index_card.html.twig" %}
-            {% endfor %}
-        </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="row d-flex justify-content-center">
+        {% for type in types|slice(3,2) %}
+            <div class="col-md-3 col-12 text-center text-primary mt-5 d-flex justify-content-center">
+                {% include "components/_index_card.html.twig" %}
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}
