@@ -11,11 +11,11 @@ class TypeFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $types = [
-            'Anime',
-            'Série',
-            'Manga',
-            'BD',
-            'Comics'
+            'anime',
+            'serie',
+            'manga',
+            'bd',
+            'comics'
         ];
 
         foreach ( $types as $type )

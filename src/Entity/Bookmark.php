@@ -10,6 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Bookmark
 {
+    const STATUS_ON_GOING = 'En cours';
+    const STATUS_END = 'Terminé';
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

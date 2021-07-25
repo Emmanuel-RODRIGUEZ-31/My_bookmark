@@ -1,0 +1,13 @@
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{ bookmark.name }}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">{{ bookmark.type }}</h6>
+    <p class="card-text">{{ bookmark.comment }}</p>
+    <p class="card-text">Started at : {{ bookmark.startedAt }}</p>
+    <p class="card-text">Update at : {{ bookmark.updateAt }}</p>
+    <div>
+      {{ form_widget(form.comment) }}    
+      <button class="btn">{{ button_label|default('Save') }}</button>
+    </div>
+  </div>
+</div>

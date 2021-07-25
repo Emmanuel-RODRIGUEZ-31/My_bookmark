@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    <div class="row m-5">
+        <div>
+            {% for type in types %}
+                {% include "components/_index_card.html.twig" %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
