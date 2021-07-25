@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="text-center card-body text-primary bg-secondary">
+            <h1>
+                <strong>Welcome to My Bookmark !</strong>
+            </h1>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto my-5">
+                <div class="card card-signin bg-primary">
+                    <div class="card-body text-primary">
+                        <h5 class="card-title text-center text-secondary">Connexion</h5>
+
+                        <form class="form-signin mt-4" method="post">
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+
+                            <div class="form-label-group">
+                                <input type="email" value="{{ last_username }}" name="email" class="form-control" autocomplete="email" placeholder="Email" required autofocus>
+                            </div>
+
+                            <div class="form-label-group my-4">
+                                <input type="password" name="password" class="form-control" autocomplete="current-password" placeholder="Password" required>
+                            </div>
+
+                            <button class=" col-12 btn btn-lg btn-secondary btn-block text-uppercase mt-4" type="submit">Connexion</button>
+                            <div class="text-center mt-4">
+                                <a href="{{ path('registration_new') }}" class="btn btn-secondary">
+                                    Sign in
+                                </a>
+                            </div>
+                           
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

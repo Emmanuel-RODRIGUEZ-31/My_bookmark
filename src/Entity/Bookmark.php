@@ -61,6 +61,11 @@ class Bookmark
      */
     private $type;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="bookmarks")
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -158,6 +163,18 @@ class Bookmark
     public function setType(?Type $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
