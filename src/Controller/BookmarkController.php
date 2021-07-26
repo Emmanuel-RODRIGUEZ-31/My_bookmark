@@ -39,12 +39,12 @@ class BookmarkController extends AbstractController
             'onGoingBookmarks' => $bookmarkRepository->findBy([
                 'user' => $this->getUser(),
                 'status' => Bookmark::STATUS_ON_GOING,
-                'type' => $typeRepository->findOneByName('anime'),
+                'type' => $typeRepository->findOneByName('anime')->getId(),
             ]),
             'endedBookmarks' => $bookmarkRepository->findBy([
                 'user' => $this->getUser(),
                 'status' => Bookmark::STATUS_END,
-                'type' => $typeRepository->findOneByName('anime'),
+                'type' => $typeRepository->findOneByName('anime')->getId(),
             ]),
         ]);
     }
@@ -56,12 +56,12 @@ class BookmarkController extends AbstractController
             'onGoingBookmarks' => $bookmarkRepository->findBy([
                 'user' => $this->getUser(),
                 'status' => Bookmark::STATUS_ON_GOING,
-                'type' => $typeRepository->findOneByName('serie'),
+                'type' => $typeRepository->findOneByName('serie')->getId(),
             ]),
             'endedBookmarks' => $bookmarkRepository->findBy([
                 'user' => $this->getUser(),
                 'status' => Bookmark::STATUS_END,
-                'type' => $typeRepository->findOneByName('serie'),
+                'type' => $typeRepository->findOneByName('serie')->getId(),
             ]),
         ]);
     }
@@ -73,12 +73,12 @@ class BookmarkController extends AbstractController
             'onGoingBookmarks' => $bookmarkRepository->findBy([
                 'user' => $this->getUser(),
                 'status' => Bookmark::STATUS_ON_GOING,
-                'type' => $typeRepository->findOneByName('manga'),
+                'type' => $typeRepository->findOneByName('manga')->getId(),
             ]),
             'endedBookmarks' => $bookmarkRepository->findBy([
                 'user' => $this->getUser(),
                 'status' => Bookmark::STATUS_END,
-                'type' => $typeRepository->findOneByName('manga'),
+                'type' => $typeRepository->findOneByName('manga')->getId(),
             ]),
         ]);
     }
@@ -90,12 +90,12 @@ class BookmarkController extends AbstractController
             'onGoingBookmarks' => $bookmarkRepository->findBy([
                 'user' => $this->getUser(),
                 'status' => Bookmark::STATUS_ON_GOING,
-                'type' => $typeRepository->findOneByName('bd'),
+                'type' => $typeRepository->findOneByName('bd')->getId(),
             ]),
             'endedBookmarks' => $bookmarkRepository->findBy([
                 'user' => $this->getUser(),
                 'status' => Bookmark::STATUS_END,
-                'type' => $typeRepository->findOneByName('bd'),
+                'type' => $typeRepository->findOneByName('bd')->getId(),
             ]),
         ]);
     }
@@ -107,12 +107,12 @@ class BookmarkController extends AbstractController
             'onGoingBookmarks' => $bookmarkRepository->findBy([
                 'user' => $this->getUser(),
                 'status' => Bookmark::STATUS_ON_GOING,
-                'type' => $typeRepository->findOneByName('comics'),
+                'type' => $typeRepository->findOneByName('comics')->getId(),
             ]),
             'endedBookmarks' => $bookmarkRepository->findBy([
                 'user' => $this->getUser(),
                 'status' => Bookmark::STATUS_END,
-                'type' => $typeRepository->findOneByName('comics'),
+                'type' => $typeRepository->findOneByName('comics')->getId(),
             ]),
         ]);
     }
@@ -124,12 +124,12 @@ class BookmarkController extends AbstractController
             'onGoingBookmarks' => $bookmarkRepository->findBy([
                 'user' => $this->getUser(),
                 'status' => Bookmark::STATUS_ON_GOING,
-                'type' => $typeRepository->findOneByName('book'),
+                'type' => $typeRepository->findOneByName('book')->getId(),
             ]),
             'endedBookmarks' => $bookmarkRepository->findBy([
                 'user' => $this->getUser(),
                 'status' => Bookmark::STATUS_END,
-                'type' => $typeRepository->findOneByName('book'),
+                'type' => $typeRepository->findOneByName('book')->getId(),
             ]),
         ]);
     }
@@ -152,7 +152,7 @@ class BookmarkController extends AbstractController
             $entityManager->persist($bookmark);
             $entityManager->flush();
             
-            return $this->redirectToRoute('bookmark_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('bookmark_' . $bookmark->getType()->getName(), [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('bookmark/new.html.twig', [
