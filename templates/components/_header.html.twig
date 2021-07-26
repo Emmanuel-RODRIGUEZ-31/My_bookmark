@@ -1,28 +1,30 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="{{ path('bookmark_index') }}">MY BOOKMARK</a>
+  <div class="container-fluid text-center">
+    <a class="navbar-brand text-primary me-5" href="{{ path('bookmark_index') }}">|| MY BOOKMARK ||</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav text-center">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="{{ path('bookmark_anime') }}">Animes</a>
+          <a class="nav-link text-primary" aria-current="page" href="{{ path('bookmark_anime') }}">Animes</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ path('bookmark_serie') }}">Series</a>
+          <a class="nav-link text-primary" href="{{ path('bookmark_serie') }}">Series</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ path('bookmark_manga') }}">Mangas</a>
+          <a class="nav-link text-primary" href="{{ path('bookmark_manga') }}">Mangas</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ path('bookmark_bd') }}">BD</a>
+          <a class="nav-link text-primary" href="{{ path('bookmark_bd') }}">BD</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ path('bookmark_comics') }}">Comics</a>
+          <a class="nav-link text-primary" href="{{ path('bookmark_comics') }}">Comics</a>
+        </li><li class="nav-item">
+          <a class="nav-link text-primary" href="{{ path('bookmark_book') }}">Books</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ path('app_logout') }}">Deconnexion</a>
+        <li class="nav-item mx-md-5">
+          <a class="nav-link text-danger" href="{{ path('app_logout') }}">|| Deconnexion ||</a>
         </li>
       </ul>
     </div>

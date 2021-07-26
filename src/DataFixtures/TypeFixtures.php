@@ -15,7 +15,8 @@ class TypeFixtures extends Fixture
             'serie',
             'manga',
             'bd',
-            'comics'
+            'comics',
+            'book'
         ];
 
         foreach ( $types as $type )

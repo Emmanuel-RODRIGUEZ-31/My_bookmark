@@ -3,9 +3,23 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
-    <h1 class="text-center mt-3">
-        My bookmarks
-    </h1>
+    {% include "components/_header.html.twig" %}
+    <div class="row mt-2 d-flex justify-content-center">
+        <div class="col-md-3 col-12 text-center text-primary border bg-light rounded-pill">
+            <h1 class="text-center mt-3">
+                My bookmarks
+            </h1>
+            <p>
+                On going : {{ onGoingBookmarks|length }}
+            </p>
+            <p>
+                Ended : {{ endedBookmarks|length }}
+            </p>
+            <p>
+                Total : {{ bookmarks|length }}
+            </p>
+        </div>
+    </div>
     <div class="row d-flex justify-content-center">
         {% for type in types|slice(0,3) %}
             <div class="col-md-3 col-12 text-center text-primary mt-5 d-flex justify-content-center">
@@ -14,7 +28,7 @@
         {% endfor %}
     </div>
     <div class="row d-flex justify-content-center">
-        {% for type in types|slice(3,2) %}
+        {% for type in types|slice(3,3) %}
             <div class="col-md-3 col-12 text-center text-primary mt-5 d-flex justify-content-center">
                 {% include "components/_index_card.html.twig" %}
             </div>

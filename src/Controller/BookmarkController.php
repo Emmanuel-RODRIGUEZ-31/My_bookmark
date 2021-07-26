@@ -19,51 +19,15 @@ class BookmarkController extends AbstractController
     public function index(BookmarkRepository $bookmarkRepository, TypeRepository $typeRepository): Response
     {
         return $this->render('bookmark/index.html.twig', [
-            'onGoingAnimesBookmarks' => $bookmarkRepository->findBy([
-                'status' => 'En cours',
-                'type' => $typeRepository->findByName('anime'),
+            'onGoingBookmarks' => $bookmarkRepository->findBy([
+                'user' => $this->getUser(),
+                'status' => Bookmark::STATUS_ON_GOING,
             ]),
-            'endedAnimesBookmarks' => $bookmarkRepository->findBy([
-                'status' => 'Terminé',
-                'type' => $typeRepository->findByName('anime'),
+            'endedBookmarks' => $bookmarkRepository->findBy([
+                'user' => $this->getUser(),
+                'status' => Bookmark::STATUS_END,
             ]),
-
-            'onGoingSeriesBookmarks' => $bookmarkRepository->findBy([
-                'status' => 'En cours',
-                'type' => $typeRepository->findByName('serie'),
-            ]),
-            'endedSeriesBookmarks' => $bookmarkRepository->findBy([
-                'status' => 'Terminé',
-                'type' => $typeRepository->findByName('serie'),
-            ]),
-
-            'onGoingMangasBookmarks' => $bookmarkRepository->findBy([
-                'status' => 'En cours',
-                'type' => $typeRepository->findByName('manga'),
-            ]),
-            'endedMangasBookmarks' => $bookmarkRepository->findBy([
-                'status' => 'Terminé',
-                'type' => $typeRepository->findByName('manga'),
-            ]),
-
-            'onGoingBdBookmarks' => $bookmarkRepository->findBy([
-                'status' => 'En cours',
-                'type' => $typeRepository->findByName('bd'),
-            ]),
-            'endedBdBookmarks' => $bookmarkRepository->findBy([
-                'status' => 'Terminé',
-                'type' => $typeRepository->findByName('bd'),
-            ]),
-
-            'onGoingComicsBookmarks' => $bookmarkRepository->findBy([
-                'status' => 'En cours',
-                'type' => $typeRepository->findByName('comics'),
-            ]),
-            'endedComicsBookmarks' => $bookmarkRepository->findBy([
-                'status' => 'Terminé',
-                'type' => $typeRepository->findByName('comics'),
-            ]),
-
+            'bookmarks' => $bookmarkRepository->findByUser($this->getUser()),
             'types' => $typeRepository->findAll(),
         ]);
     }
@@ -73,12 +37,14 @@ class BookmarkController extends AbstractController
     {
         return $this->render('bookmark/animes.html.twig', [
             'onGoingBookmarks' => $bookmarkRepository->findBy([
-                'status' => 'En cours',
-                'type' => $typeRepository->findByName('anime'),
+                'user' => $this->getUser(),
+                'status' => Bookmark::STATUS_ON_GOING,
+                'type' => $typeRepository->findOneByName('anime'),
             ]),
             'endedBookmarks' => $bookmarkRepository->findBy([
-                'status' => 'Terminé',
-                'type' => $typeRepository->findByName('anime'),
+                'user' => $this->getUser(),
+                'status' => Bookmark::STATUS_END,
+                'type' => $typeRepository->findOneByName('anime'),
             ]),
         ]);
     }
@@ -86,16 +52,16 @@ class BookmarkController extends AbstractController
     #[Route('/serie', name: 'serie', methods: ['GET'])]
     public function serie(BookmarkRepository $bookmarkRepository, TypeRepository $typeRepository): Response
     {
-        $type = $typeRepository->findByName('serie');
-
         return $this->render('bookmark/series.html.twig', [
             'onGoingBookmarks' => $bookmarkRepository->findBy([
-                'status' => 'En cours',
-                'type' => $typeRepository->findByName('serie'),
+                'user' => $this->getUser(),
+                'status' => Bookmark::STATUS_ON_GOING,
+                'type' => $typeRepository->findOneByName('serie'),
             ]),
             'endedBookmarks' => $bookmarkRepository->findBy([
-                'status' => 'Terminé',
-                'type' => $typeRepository->findByName('serie'),
+                'user' => $this->getUser(),
+                'status' => Bookmark::STATUS_END,
+                'type' => $typeRepository->findOneByName('serie'),
             ]),
         ]);
     }
@@ -105,12 +71,14 @@ class BookmarkController extends AbstractController
     {
         return $this->render('bookmark/mangas.html.twig', [
             'onGoingBookmarks' => $bookmarkRepository->findBy([
-                'status' => 'En cours',
-                'type' => $typeRepository->findByName('manga'),
+                'user' => $this->getUser(),
+                'status' => Bookmark::STATUS_ON_GOING,
+                'type' => $typeRepository->findOneByName('manga'),
             ]),
             'endedBookmarks' => $bookmarkRepository->findBy([
-                'status' => 'Terminé',
-                'type' => $typeRepository->findByName('manga'),
+                'user' => $this->getUser(),
+                'status' => Bookmark::STATUS_END,
+                'type' => $typeRepository->findOneByName('manga'),
             ]),
         ]);
     }
@@ -120,12 +88,14 @@ class BookmarkController extends AbstractController
     {
         return $this->render('bookmark/bd.html.twig', [
             'onGoingBookmarks' => $bookmarkRepository->findBy([
-                'status' => 'En cours',
-                'type' => $typeRepository->findByName('bd'),
+                'user' => $this->getUser(),
+                'status' => Bookmark::STATUS_ON_GOING,
+                'type' => $typeRepository->findOneByName('bd'),
             ]),
             'endedBookmarks' => $bookmarkRepository->findBy([
-                'status' => 'Terminé',
-                'type' => $typeRepository->findByName('bd'),
+                'user' => $this->getUser(),
+                'status' => Bookmark::STATUS_END,
+                'type' => $typeRepository->findOneByName('bd'),
             ]),
         ]);
     }
@@ -135,12 +105,31 @@ class BookmarkController extends AbstractController
     {
         return $this->render('bookmark/comics.html.twig', [
             'onGoingBookmarks' => $bookmarkRepository->findBy([
-                'status' => 'En cours',
-                'type' => $typeRepository->findByName('comics'),
+                'user' => $this->getUser(),
+                'status' => Bookmark::STATUS_ON_GOING,
+                'type' => $typeRepository->findOneByName('comics'),
             ]),
             'endedBookmarks' => $bookmarkRepository->findBy([
-                'status' => 'Terminé',
-                'type' => $typeRepository->findByName('comics'),
+                'user' => $this->getUser(),
+                'status' => Bookmark::STATUS_END,
+                'type' => $typeRepository->findOneByName('comics'),
+            ]),
+        ]);
+    }
+
+    #[Route('/book', name: 'book', methods: ['GET'])]
+    public function book(BookmarkRepository $bookmarkRepository, TypeRepository $typeRepository): Response
+    {
+        return $this->render('bookmark/book.html.twig', [
+            'onGoingBookmarks' => $bookmarkRepository->findBy([
+                'user' => $this->getUser(),
+                'status' => Bookmark::STATUS_ON_GOING,
+                'type' => $typeRepository->findOneByName('book'),
+            ]),
+            'endedBookmarks' => $bookmarkRepository->findBy([
+                'user' => $this->getUser(),
+                'status' => Bookmark::STATUS_END,
+                'type' => $typeRepository->findOneByName('book'),
             ]),
         ]);
     }
@@ -156,12 +145,13 @@ class BookmarkController extends AbstractController
             
             $bookmark
                 ->setStartedAt(new DateTimeImmutable('now'))
-                ->setStatus(Bookmark::STATUS_ON_GOING);
+                ->setStatus(Bookmark::STATUS_ON_GOING)
+                ->setUser($this->getUser());
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($bookmark);
             $entityManager->flush();
-
+            
             return $this->redirectToRoute('bookmark_index', [], Response::HTTP_SEE_OTHER);
         }
 
