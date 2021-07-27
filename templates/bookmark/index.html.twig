@@ -34,4 +34,31 @@
             </div>
         {% endfor %}
     </div>
+    <hr>
+    <div class="text-center mt-3 d-flex justify-content-center">
+        <div class="col-5">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <div class="text-right">
+                <button class="btn btn-primary border my-3">{{ button_label|default('Rechercher') }}</button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+    <div class="text-center text-primary">
+        <div class="text-center row row-cols-1 row-cols-md-3 g-4 m-4">
+            {% if searchResult == null %}
+                <p>
+                    {{ message }}
+                </p>
+            {% else %}
+                {% for bookmark in searchResult %}
+                    {% include "components/_onGoingBookmarks_card.html.twig" %}                    
+                {% endfor %}
+            {% endif %}
+            
+        </div>
+    </div>
+
 {% endblock %}

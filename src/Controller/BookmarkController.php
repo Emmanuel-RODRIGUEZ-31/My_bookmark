@@ -11,13 +11,30 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Form\SearchBookmarkType;
 
 #[Route('/bookmark', name: 'bookmark_')]
 class BookmarkController extends AbstractController
 {
-    #[Route('/index', name: 'index', methods: ['GET'])]
-    public function index(BookmarkRepository $bookmarkRepository, TypeRepository $typeRepository): Response
+    #[Route('/index', name: 'index', methods: ['GET', 'POST'])]
+    public function index(Request $request, BookmarkRepository $bookmarkRepository, TypeRepository $typeRepository): Response
     {
+        $form = $this->createForm(SearchBookmarkType::class);
+        $form->handleRequest($request);
+        $message = 'No results';
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $search = $form->getData()['search'];
+            if (strlen($search) === 0) {
+                $bookmarks = null;
+            }
+            else {
+                $bookmarks = $bookmarkRepository->findLikeName($search);
+            }
+        } else {
+            $bookmarks = null;
+        }
+
         return $this->render('bookmark/index.html.twig', [
             'onGoingBookmarks' => $bookmarkRepository->findBy([
                 'user' => $this->getUser(),
@@ -29,6 +46,9 @@ class BookmarkController extends AbstractController
             ]),
             'bookmarks' => $bookmarkRepository->findByUser($this->getUser()),
             'types' => $typeRepository->findAll(),
+            'form' => $form->createView(),
+            'searchResult' => $bookmarks,
+            'message' => $message,
         ]);
     }
 

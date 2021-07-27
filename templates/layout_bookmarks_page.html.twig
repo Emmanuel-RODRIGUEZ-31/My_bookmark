@@ -19,6 +19,9 @@
             </h4>
             <hr>
             <div>
+                <a class="btn btn-light text-primary m-2" href="{{ path('bookmark_new') }}">Create new</a>
+            </div>
+            <div>
                 {% if onGoingBookmarks|length == 0 %}
                     <p>
                         You don't have any bookmark !
@@ -32,9 +35,6 @@
                         {% endfor %}                    
                     </div>
                 {% endif %}
-            </div>
-            <div>
-                <a class="btn btn-light text-primary m-2" href="{{ path('bookmark_new') }}">Create new</a>
             </div>
         </div>
     </div>

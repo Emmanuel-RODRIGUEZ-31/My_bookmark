@@ -19,22 +19,16 @@ class BookmarkRepository extends ServiceEntityRepository
         parent::__construct($registry, Bookmark::class);
     }
 
-    // /**
-    //  * @return Bookmark[] Returns an array of Bookmark objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findLikeName(string $name)
     {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('b.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $queryBuilder = $this->createQueryBuilder('p')
+            ->where('p.name LIKE :name')
+            ->setParameter('name', '%' . $name . '%')
+            ->orderBy('p.name', 'ASC')
+            ->getQuery();
+
+        return $queryBuilder->getResult();
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Bookmark
