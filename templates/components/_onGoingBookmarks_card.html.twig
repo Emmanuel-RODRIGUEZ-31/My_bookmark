@@ -7,7 +7,7 @@
 		<p class="card-text">Update at :
 			{{ bookmark.updateAt|date('d/m/Y') }}
 		</p>
-		<div class="text-center text-primary">
+		<div class="card-text text-center text-primary">
 			<form action="{{ path('bookmark_edit', {id: bookmark.id}) }}" method="POST">
 				<p>
 					Bookmark :
@@ -22,7 +22,7 @@
 				<input class="btn btn-primary m-3" type="submit" value="Edit"></input>
 			</form>
 		</div>
-		<div class="text-center m-3">
+		<div class="card-text text-center m-3">
 			<a href="{{ path('bookmark_close', {id: bookmark.id}) }}" class="btn btn-warning mx-2" >End</a>
 			<a href="{{ path('bookmark_delete', {id : bookmark.id}) }}" class="btn btn-danger mx-2">Delete</a>
 		</div>

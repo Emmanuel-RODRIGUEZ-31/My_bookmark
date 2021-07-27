@@ -46,19 +46,19 @@
         </div>
     </div>
 
-    <div class="text-center text-primary">
-        <div class="text-center row row-cols-1 row-cols-md-3 g-4 m-4">
-            {% if searchResult == null %}
-                <p>
-                    {{ message }}
-                </p>
-            {% else %}
-                {% for bookmark in searchResult %}
-                    {% include "components/_onGoingBookmarks_card.html.twig" %}                    
-                {% endfor %}
-            {% endif %}
-            
-        </div>
+    <div class="text-center row row-cols-1 row-cols-md-3 g-4 m-4">
+        {% if searchResult == null %}
+            <p class="col">
+                {{ message }}
+            </p>
+        {% else %}
+            {% for bookmark in searchResult %}
+                <div class="col">
+                    {% include "components/_onGoingBookmarks_card.html.twig" %}   
+                </div>                 
+            {% endfor %}
+        {% endif %}
+        
     </div>
 
 {% endblock %}

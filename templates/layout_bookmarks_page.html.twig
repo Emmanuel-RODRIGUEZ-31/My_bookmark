@@ -11,17 +11,21 @@
         </h2>
     </div>
 
-    <div class="row m-5">
+    <div class="text-center">
+        <a href="#ended" class="btn btn-primary text-secondary m-2">Ended bookmarks</a>
+    </div>
 
-        <div class="col text-center border border-dark rounded-3">
+    <div class="row d-flex justify-content-center">
+
+        <div class="col-auto text-center border border-dark rounded-3">
             <h4 class="mt-3">
                 On going
             </h4>
             <hr>
             <div>
-                <a class="btn btn-light text-primary m-2" href="{{ path('bookmark_new') }}">Create new</a>
+                <a class="btn btn-light text-primary m-2 " href="{{ path('bookmark_new') }}">Create new</a>
             </div>
-            <div>
+            <div id="onGoing">
                 {% if onGoingBookmarks|length == 0 %}
                     <p>
                         You don't have any bookmark !
@@ -39,13 +43,17 @@
         </div>
     </div>
 
-    <div class="row m-5">
+    <div class="text-center">
+        <a href="#onGoing" class="btn btn-primary text-secondary m-2">On going bookmarks</a>
+    </div>
+
+    <div class="row d-flex justify-content-center">
         <div class="col text-center border border-dark rounded-3">
             <h4 class="mt-3">
                 Ended
             </h4>
             <hr>
-            <div>
+            <div id="ended">
                 {% if endedBookmarks|length == 0 %}
                     <p>
                         You don't have any ended bookmark !
@@ -57,6 +65,7 @@
                 {% endif %}
             </div>
         </div>
+    </div>
 
     <div class="container-fuild">
         {% block bottomContent %}{% endblock %}    
