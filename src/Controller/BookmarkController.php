@@ -161,42 +161,44 @@ class BookmarkController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'show', methods: ['GET'])]
-    public function show(Bookmark $bookmark): Response
-    {
-        return $this->render('bookmark/show.html.twig', [
-            'bookmark' => $bookmark,
-        ]);
-    }
-
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Bookmark $bookmark): Response
+    public function edit(Bookmark $bookmark): Response
     {
-        $form = $this->createForm(BookmarkType::class, $bookmark);
-        $form->handleRequest($request);
+        $post = $_POST;
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $bookmark->setUpdateAt(new DateTimeImmutable('now'));
-            $this->getDoctrine()->getManager()->flush();
+        $bookmark->setBookmark($post['bookmark']);
+        $bookmark->setComment($post['comment']);
+        $bookmark->setUpdateAt(new DateTimeImmutable('now'));
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->flush();
 
-            return $this->redirectToRoute('bookmark_index', [], Response::HTTP_SEE_OTHER);
-        }
+        $route = $bookmark->getType()->getName();
 
-        return $this->renderForm('bookmark/edit.html.twig', [
-            'bookmark' => $bookmark,
-            'form' => $form,
-        ]);
+        return $this->redirectToRoute('bookmark_' . $route, [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}/delete', name: 'delete', methods: ['POST'])]
-    public function delete(Request $request, Bookmark $bookmark): Response
+    #[Route('/{id}/close', name: 'close', methods: ['GET', 'POST'])]
+    public function close(Bookmark $bookmark): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$bookmark->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($bookmark);
-            $entityManager->flush();
-        }
+        $bookmark->setStatus(Bookmark::STATUS_END);
+        $bookmark->setEndedAt(new DateTimeImmutable('now'));
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->flush();
+        
+        $route = $bookmark->getType()->getName();
 
-        return $this->redirectToRoute('bookmark_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('bookmark_' . $route, [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/delete', name: 'delete', methods: ['GET', 'POST'])]
+    public function delete(Bookmark $bookmark): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($bookmark);
+        $entityManager->flush();
+        
+        $route = $bookmark->getType()->getName();
+
+        return $this->redirectToRoute('bookmark_' . $route, [], Response::HTTP_SEE_OTHER);
     }
 }

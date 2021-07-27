@@ -1,12 +1,30 @@
-<div class="card rounded-pill" style="width: 18rem;">
+<div class="card rounded-5 text-center text-primary" style="width: 18rem;">
 	<div class="card-body">
 		<h5 class="card-title">{{ bookmark.name }}</h5>
 		<h6 class="card-subtitle mb-2 text-muted">{{ bookmark.type.name }}</h6>
-		<p class="card-text">{{ bookmark.comment }}</p>
 		<p class="card-text">Started at :
 			{{ bookmark.startedAt|date('d/m/Y') }}</p>
 		<p class="card-text">Update at :
-			{{ bookmark.updateAt }}
+			{{ bookmark.updateAt|date('d/m/Y') }}
 		</p>
+		<div class="text-center text-primary">
+			<form action="{{ path('bookmark_edit', {id: bookmark.id}) }}" method="POST">
+				<p>
+					Bookmark :
+				</p>
+				<input id="bookmark" type="text" step="0.01" name="bookmark" value="{{ bookmark.bookmark }}">
+
+				<p>
+					Comment :
+				</p>
+				<input id="comment" type="text" step="0.01" name="comment" value="{{ bookmark.comment }}">
+
+				<input class="btn btn-primary m-3" type="submit" value="Edit"></input>
+			</form>
+		</div>
+		<div class="text-center m-3">
+			<a href="{{ path('bookmark_close', {id: bookmark.id}) }}" class="btn btn-warning mx-2" >End</a>
+			<a href="{{ path('bookmark_delete', {id : bookmark.id}) }}" class="btn btn-danger mx-2">Delete</a>
+		</div>
 	</div>
 </div>

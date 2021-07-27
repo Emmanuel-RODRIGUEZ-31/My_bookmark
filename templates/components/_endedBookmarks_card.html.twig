@@ -1,10 +1,12 @@
-<div class="card" style="width: 18rem;">
+<div class="card m-2" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">{{ bookmark.name }}</h5>
-    <h6 class="card-subtitle mb-2 text-muted">{{ bookmark.type }}</h6>
+    <h6 class="card-subtitle mb-2 text-muted">{{ bookmark.type.name }}</h6>
     <p class="card-text">{{ bookmark.comment }}</p>
-    <p class="card-text">{{ bookmark.bookmark }}</p>
-    <p class="card-text">Started at : {{ bookmark.startedAt }}</p>
-    <p class="card-text">Ended at : {{ bookmark.endedAt }}</p>
+    <p class="card-text">Started at : {{ bookmark.startedAt|date('d/m/Y') }}</p>
+    <p class="card-text">Ended at : {{ bookmark.endedAt|date('d/m/Y') }}</p>
+  </div>
+  <div class="text-center m-3">
+    <a href="{{ path('bookmark_delete', {id : bookmark.id}) }}" class="btn btn-danger">Delete</a>
   </div>
 </div>

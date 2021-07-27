@@ -24,9 +24,13 @@
                         You don't have any bookmark !
                     </p>
                 {% else %}
-                    {% for bookmark in onGoingBookmarks %}
-                        {% include "components/_onGoingBookmarks_card.html.twig" %}
-                    {% endfor %}                    
+                    <div class="row row-cols-1 row-cols-md-3 g-4 m-4">
+                        {% for bookmark in onGoingBookmarks %}
+                            <div class="col">   
+                                {% include "components/_onGoingBookmarks_card.html.twig" %}
+                            </div>
+                        {% endfor %}                    
+                    </div>
                 {% endif %}
             </div>
             <div>
