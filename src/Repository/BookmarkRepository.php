@@ -19,11 +19,15 @@ class BookmarkRepository extends ServiceEntityRepository
         parent::__construct($registry, Bookmark::class);
     }
 
-    public function findLikeName(string $name)
+    public function findLikeName(string $name, int $user)
     {
         $queryBuilder = $this->createQueryBuilder('p')
             ->where('p.name LIKE :name')
+            ->andWhere('p.user = :user')
+            ->andWhere('p.status = :status')
             ->setParameter('name', '%' . $name . '%')
+            ->setParameter('user', $user)
+            ->setParameter('status', Bookmark::STATUS_ON_GOING)
             ->orderBy('p.name', 'ASC')
             ->getQuery();
 

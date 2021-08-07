@@ -3,7 +3,7 @@
 		<h5 class="card-title">{{ type.name }}</h5>
 		<hr>
 		<p class="card-text">
-			Total :{{ type.bookmarks|length }}
+			Total :{{ (type.name ~ 'Count')|e }}
 		</p>
 		<a href="/bookmark/{{ type.name }}" class="btn btn-secondary text-primary">Go to
 			{{ type.name }}'s page</a>

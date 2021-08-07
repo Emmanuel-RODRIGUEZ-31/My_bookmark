@@ -29,7 +29,7 @@ class BookmarkController extends AbstractController
                 $bookmarks = null;
             }
             else {
-                $bookmarks = $bookmarkRepository->findLikeName($search);
+                $bookmarks = $bookmarkRepository->findLikeName($search, $this->getUser()->getId());
             }
         } else {
             $bookmarks = null;
@@ -46,6 +46,36 @@ class BookmarkController extends AbstractController
             ]),
             'bookmarks' => $bookmarkRepository->findByUser($this->getUser()),
             'types' => $typeRepository->findAll(),
+            'animeCount' => $bookmarkRepository->findBy([
+                'user' => $this->getUser(),
+                'type' => 'anime',
+                'status' => Bookmark::STATUS_ON_GOING,
+            ]),
+            'serieCount' => $bookmarkRepository->findBy([
+                'user' => $this->getUser(),
+                'type' => 'serie',
+                'status' => Bookmark::STATUS_ON_GOING,
+            ]),
+            'mangaCount' => $bookmarkRepository->findBy([
+                'user' => $this->getUser(),
+                'type' => 'manga',
+                'status' => Bookmark::STATUS_ON_GOING,
+            ]),
+            'bdCount' => $bookmarkRepository->findBy([
+                'user' => $this->getUser(),
+                'type' => 'bd',
+                'status' => Bookmark::STATUS_ON_GOING,
+            ]),
+            'comicsCount' => $bookmarkRepository->findBy([
+                'user' => $this->getUser(),
+                'type' => 'comics',
+                'status' => Bookmark::STATUS_ON_GOING,
+            ]),
+            'bookCount' => $bookmarkRepository->findBy([
+                'user' => $this->getUser(),
+                'type' => 'book',
+                'status' => Bookmark::STATUS_ON_GOING,
+            ]),
             'form' => $form->createView(),
             'searchResult' => $bookmarks,
             'message' => $message,
